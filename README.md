@@ -1,6 +1,6 @@
-<!DOCTYPE html>
+
 <html>
-<head>
+ <head>
 	<title>Gallant</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
