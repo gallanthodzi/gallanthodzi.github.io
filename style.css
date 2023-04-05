@@ -1,0 +1,204 @@
+/* General Styles */
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: Arial, sans-serif;
+}
+
+header, section {
+	padding: 50px 20px;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+	margin-bottom: 10px;
+}
+
+ul {
+	list-style: none;
+	margin-bottom: 20px;
+}
+
+a {
+	color: #fff;
+	text-decoration: none;
+}
+
+.cta-btn {
+	background-color: #2e3236;
+	padding: 10px 20px;
+	border-radius: 5px;
+}
+
+.cta-btn:hover {
+	background-color: #165d9a;
+}
+
+/* Header Section */
+
+header{
+    background: linear-gradient(45deg, rgba(87, 41, 119, 1) 0%, rgba(154, 22, 80, 1) 50%, rgba(243, 116, 97, 1) 100%);
+	/* background: linear-gradient(to bottom, #b9d2ff, #99a8ff); */
+	color: #fff;
+	text-align: center;
+	position: relative;
+}
+
+header img {
+	max-width: 100%;
+}
+
+header h1 {
+	font-size: 48px;
+}
+
+header h2 {
+	font-size: 24px;
+	margin-bottom: 20px;
+}
+
+header .cta-btn {
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+/* Services Section */
+
+#services {
+	background-color: #f1f1f1;
+}
+
+#services h3 {
+	margin-top: 30px;
+}
+
+#services ul {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#services li {
+	flex: 1 0 33%;
+	padding: 10px;
+	text-align: center;
+}
+
+/* Skills Section */
+
+#skills {
+	background-color: #fff;
+}
+
+#skills h3 {
+	margin-top: 30px;
+}
+
+#skills ul {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#skills li {
+	flex: 1 0 33%;
+	padding: 10px;
+	text-align: center;
+}
+
+/* Portfolio Section */
+
+#portfolio {
+	background-color: #f1f1f1;
+}
+
+.project {
+	padding: 20px;
+	text-align: center;
+}
+
+.project img {
+	max-width: 100%;
+}
+
+.project h3 {
+	margin-top: 10px;
+}
+
+/* Testimonials Section */
+
+#testimonials {
+	background-color: #fff;
+}
+
+.testimonial {
+	padding: 20px;
+	text-align: center;
+}
+
+.testimonial img {
+	border-radius: 50%;
+	max-width: 100px;
+}
+
+.testimonial p {
+	margin-top: 10px;
+}
+footer {
+    background: linear-gradient(45deg, rgba(87, 41, 119, 1) 0%, rgba(154, 22, 80, 1) 50%, rgba(243, 116, 97, 1) 100%);    padding: 50px ;
+    justify-content: center;
+  }
+  
+  footer h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  footer p {
+    line-height: 1.5;
+  }
+  
+  .social-icons {
+    display: flex;
+    list-style: none;
+    margin-top: 20px;
+  }
+  
+  .social-icons li {
+    margin-right: 10px;
+  }
+  
+  .social-icons li:last-child {
+    margin-right: 0;
+  }
+  
+  .social-icons a {
+    color: #fff;
+    display: inline-block;
+    font-size: 24px;
+  }
+  
+  @media (max-width: 768px) {
+    footer {
+      text-align: center;
+    }
+    
+    footer .container {
+      width: 100%;
+      max-width: 100%;
+    }
+    
+    footer .row {
+      flex-direction: column;
+    }
+    
+    footer .col-md-4 {
+      margin-bottom: 20px;
+    }
+  }
+  
