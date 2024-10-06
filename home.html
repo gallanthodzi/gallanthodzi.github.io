@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel Gallant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        /* CSS styles */
+        :root {
+            --primary-color: #00ff00;
+            --secondary-color: #0000ff;
+            --background-color: #000000;
+            --text-color: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 0 20px;
+        }
+
+        header {
+            height: 20vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            list-style-type: none;
+        }
+
+        nav ul li {
+            margin-left:1rem;
+        }
+
+        nav ul li a {
+            color: var(--neon-text-color);
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+            
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: var(--background-color);
+            z-index: -1;
+        }
+
+        .glitch {
+            font-size: 3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            position: relative;
+            text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+                0.025em 0.04em 0 #fffc00;
+            animation: glitch 725ms infinite;
+        }
+
+        .glitch span {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .glitch span:first-child {
+            animation: glitch 500ms infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+            transform: translate(-0.04em, -0.03em);
+            opacity: 0.75;
+        }
+
+        .glitch span:last-child {
+            animation: glitch 375ms infinite;
+            clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+            transform: translate(0.04em, 0.03em);
+            opacity: 0.75;
+        }
+
+        @keyframes glitch {
+            0% {
+                text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+                    0.025em 0.04em 0 #fffc00;
+            }
+            15% {
+                text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+                    0.025em 0.04em 0 #fffc00;
+            }
+            16% {
+                text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff,
+                    -0.05em -0.05em 0 #fffc00;
+            }
+            49% {
+                text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff,
+                    -0.05em -0.05em 0 #fffc00;
+            }
+            50% {
+                text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff,
+                    0 -0.04em 0 #fffc00;
+            }
+            99% {
+                text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff,
+                    0 -0.04em 0 #fffc00;
+            }
+            100% {
+                text-shadow: -0.05em 0 0 #00fffc, -0.025em -0.04em 0 #fc00ff,
+                    -0.04em -0.025em 0 #fffc00;
+            }
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--background-color);
+            padding: 10px 30px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .skills {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .skill {
+            width: 200px;
+            margin-bottom: 30px;
+        }
+
+        .skill-name {
+            margin-bottom: 10px;
+        }
+
+        .skill-bar {
+            height: 10px;
+            background: #333;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skill-percent {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0;
+            transition: width 1s ease-out;
+        }
+
+        .services {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            width: 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 255, 0, 0.2);
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            border-radius: 5px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            font-size: 24px;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        aside {
+            width: 30%;
+            float: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            margin-left: 20px;
+            border-radius: 10px;
+        }
+
+        aside h2 {
+            margin-bottom: 20px;
+        }
+
+        .blog-post {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .blog-post:last-child {
+            border-bottom: none;
+        }
+
+        .blog-post h3 {
+            margin-bottom: 10px;
+        }
+
+        .blog-post p {
+            margin-bottom: 10px;
+        }
+
+        .blog-post a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .blog-post a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+
+            .glitch {
+                font-size: 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .skill {
+                width: 100%;
+            }
+
+            .service-card {
+                width: 100%;
+            }
+
+            aside {
+                width: 100%;
+                float: none;
+                margin-left: 0;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <header>
+        <nav class="container">
+            <h1 class="glitch">Sentinel Gallant </h1>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1 id="typing-text"></h1>
+                <p>Securing the digital world, one vulnerability at a time.</p>
+                <a href="#contact" class="btn">Get in Touch</a>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <h2><p>I'm a passionate cybersecurity professional specializing in Social Engineering, penetration testing, web application security and bug bounty hunting. With years of experience in identifying and exploiting vulnerabilities, I help organizations strengthen their digital, human interactions defenses and protect their valuable assets.</p></h2>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="container">
+                <h2 class="section-title">Skills</h2>
+                <div class="skills">
+                    <div class="skill">
+                        <div class="skill-name">Social Engineering</div>
+                        <div class="skill-bar">
+                            <div class="skill-percent" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-name">Penetration Testing</div>
+                        <div class="skill-bar">
+                            <div class="skill-percent" style="width: 50%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-name">Web Application & Software Development</div>
+                        <div class="skill-bar">
+                            <div class="skill-percent" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-name">Web Application Security</div>
+                        <div class="skill-bar">
+                            <div class="skill-percent" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-name">Bug Bounty Hunting</div>
+                        <div class="skill-bar">
+                            <div class="skill-percent" style="width: 40%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <aside>
+            <h2>Latest Blog Posts</h2>
+            <div class="blog-post">
+                <h3>Understanding XSS Vulnerabilities</h3>
+                <p>Learn about the different types of Cross-Site Scripting (XSS) attacks and how to prevent them.</p>
+                <a href="#">Read More</a>
+            </div>
+            <div class="blog-post">
+                <h3>The Importance of Regular Security Audits</h3>
+                <p>Discover why conducting regular security audits is crucial for maintaining a strong security posture.</p>
+                <a href="#">Read More</a>
+            </div>
+        </aside>
+        <section id="services" class="section">
+            <div class="container">
+                <h2 class="section-title">Services</h2>
+                <div class="services">
+                    <div class="service-card">
+                        <h3>Social Engineering</h3>
+                        <p>Social ngineering is crucial for enhancing security awareness and preventing potential attacks.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Bug Bounty Hunting</h3>
+                        <p>Identifying and reporting security vulnerabilities in web applications and networks.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Penetration Testing</h3>
+                        <p>Simulating real-world attacks to uncover vulnerabilities in your systems and applications.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Security Consulting</h3>
+                        <p>Providing expert advice on improving your organization's overall security posture.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Social Media Hacking</h3>
+                        <p>contact me</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title">Contact Me</h2>
+
+                <div class="social-links">
+                    <a href="https://instagram.com/gallant_hodzi" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com/gallanthodzi" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/in/gallanthodzi" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="mailto:meekgallant@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+    <script>
+        // Particles.js configuration
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#00ff00' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#00ff00', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 6, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { grab: { distance: 400, line_linked: { opacity: 1 } }, bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 }, repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 }, remove: { particles_nb: 2 } }
+            },
+            retina_detect: true
+        });
+
+        // Typing effect
+        const texts = ['Bug Bounty Hunter', 'Penetration Tester', 'Web Application Tester', 'Web Developer'];
+        let count = 0;
+        let index = 0;
+        let currentText = '';
+        let letter = '';
+
+        (function type() {
+            if (count === texts.length) {
+                count = 0;
+            }
+            currentText = texts[count];
+            letter = currentText.slice(0, ++index);
+
+            document.querySelector('#typing-text').textContent = letter;
+            if (letter.length === currentText.length) {
+                count++;
+                index = 0;
+                setTimeout(type, 2000);
+            } else {
+                setTimeout(type, 100);
+            }
+        })();
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animate skill bars on scroll
+        function animateSkillBars() {
+            const skillBars = document.querySelectorAll('.skill-percent');
+            skillBars.forEach(bar => {
+                const barTop = bar.getBoundingClientRect().top;
+                if (barTop <= window.innerHeight) {
+                    bar.style.width = bar.parentElement.dataset.percent;
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateSkillBars);
+        window.addEventListener('load', animateSkillBars);
+
+        // Form submission (replace with your own backend logic)
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+        });
+    </script>
+</body>
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Connect</h3>
+            <div class="social-links">
+                <a href="https://instagram.com/gallant_hodzi" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com/gallanthodzi" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/in/gallanthodzi" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:meekgallant@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+        </div>
+        <div class="footer-section">
+
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 Sentinel Gallant. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </div>
+    <style>
+
+        .footer {
+            background-color: #111;
+            color: #fff;
+            padding: 3rem 0 1rem;
+            border-top: 1px solid var(--neon-border-color);
+        }
+    
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+    
+        .footer-section {
+            margin-bottom: 2rem;
+        }
+    
+        .footer-section h3 {
+            color: var(--neon-text-color);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+    
+        .footer-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+    
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+    
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+    
+        .footer-section ul li a:hover {
+            color: var(--neon-text-color);
+        }
+    
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+    
+        .social-icon {
+            color: #ccc;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+    
+        .social-icon:hover {
+            color: var(--neon-text-color);
+        }
+    
+        .newsletter-form {
+            display: flex;
+            margin-top: 1rem;
+        }
+    
+        .newsletter-form input {
+            padding: 0.5rem;
+            border: none;
+            background-color: #222;
+            color: #fff;
+            flex-grow: 1;
+        }
+    
+        .newsletter-form button {
+            padding: 0.5rem 1rem;
+            border: none;
+            background-color: var(--neon-border-color);
+            color: #000;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+    
+        .newsletter-form button:hover {
+            background-color: var(--neon-text-color);
+        }
+    
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #333;
+        }
+    
+        .footer-bottom p {
+            font-size: 0.9rem;
+            color: #888;
+        }
+    
+        .footer-bottom a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+    
+        .footer-bottom a:hover {
+            color: var(--neon-text-color);
+        }
+    
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+            }
+    
+            .footer-section {
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+    
+            .social-icons {
+                justify-content: center;
+            }
+    
+            .newsletter-form {
+                flex-direction: column;
+            }
+    
+            .newsletter-form input,
+            .newsletter-form button {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</footer>
+</html>
