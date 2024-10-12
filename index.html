@@ -1,201 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gallant</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel Gallant | Elite Red Team Operations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #ff3e3e;
+            --secondary-color: #1a1a1a;
+            --text-color: #ffffff;
+            --accent-color: #00ffff;
+        }
 
-<meta name="title" content="Gallant" />
-<meta author="Gallant" content="Gallant" />
-<meta name="description" content="bug Bounty Hunter, Ethical hacker, Offensive Security Certified Professional." />
-
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://Gallant.in/" />
-<meta property="og:title" content="Gallant" />
-<meta property="og:description" content="bug Bounty Hunter, Ethical hacker, Offensive Security Certified Professional." />
-<meta property="og:image" content="https://Gallant.in/img/meta.png" />
-
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content="https://galalnt.in/" />
-<meta property="twitter:title" content="gallant" />
-<meta property="twitter:description" content="bug Bounty Hunter, Ethical hacker, Offensive Security Certified Professional." />
-<meta property="twitter:image" content="https://anir0y.in/img/meta.png" />
-
-
-<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-<link rel="icon" href="https://anir0y.in/favicon.ico" type="image/x-icon">
-<link rel="apple-touch-icon" href="img/favicon.ico">
-<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
-<link rel="manifest" href="img/site.webmanifest">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<style>
-        html, body {
-            height: 100%;
+        * {
             margin: 0;
-            max-width: 100vw;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
+            padding: 0;
+            box-sizing: border-box;
         }
+
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            transition: background-color 0.5s ease, color 0.5s ease;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            overflow-x: hidden;
         }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
         .container {
-            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 20px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px rgba(255, 62, 62, 0.7);
+        }
+
+        main {
+            min-height: calc(100vh - 100px);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            max-width: 100%;
-        }
-        .profile-image {
-            width: 150px;
-            border-radius: 50%;
-        }
-        .social-links a {
-            margin: 0 10px;
-            color: #000;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .button-container a {
-            display: inline-block;
-            margin: 10px;
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        footer {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #f1f1f1;
-            width: 100%;
             text-align: center;
-            transition: background-color 0.5s ease, color 0.5s ease;
+            padding: 50px 0;
         }
-        .dark-mode {
-            background-color: #121212;
-            color: #ffffff;
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 62, 62, 0.5);
         }
-        .dark-mode .social-links a {
-            color: #ffffff;
+
+        p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 40px;
+            line-height: 1.6;
         }
-        .dark-mode footer {
-            background-color: #222;
-            color: #ffffff;
-        }
-        .switch {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
+
+        .btn-container {
             display: flex;
-            align-items: center;
+            gap: 20px;
         }
-        .switch input {
-            display: none;
-        }
-        .slider {
-            width: 50px;
-            height: 25px;
-            background-color: #ccc;
-            border-radius: 25px;
+
+        .btn {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-color);
+            background-color: var(--primary-color);
+            padding: 12px 24px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
             position: relative;
+            overflow: hidden;
             cursor: pointer;
-            transition: background-color 0.3s, box-shadow 0.3s;
         }
-        .slider:before {
-            content: "";
+
+        .btn::before {
+            content: '';
             position: absolute;
-            width: 21px;
-            height: 21px;
-            background-color: #fff;
-            border-radius: 50%;
-            top: 2px;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(45deg);
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .btn-container {
+                flex-direction: column;
+            }
+        }
+
+        .glitch {
+            position: relative;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
             left: 2px;
-            transition: transform 0.3s ease;
+            text-shadow: -2px 0 var(--accent-color);
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
         }
-        input:checked + .slider {
-            background-color: #007BFF;
+
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 var(--primary-color);
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
         }
-        input:checked + .slider:before {
-            transform: translateX(25px);
+
+        @keyframes glitch-anim {
+            0% {
+                clip: rect(10px, 9999px, 31px, 0);
+            }
+            100% {
+                clip: rect(99px, 9999px, 155px, 0);
+            }
         }
-        /* Fade effect */
-        .fade {
-            animation: fadeEffect 0.5s;
-        }
-        @keyframes fadeEffect {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .slider .icon-sun,
-        .slider .icon-moon {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 16px;
-            transition: opacity 0.3s;
-        }
-        .slider .icon-sun {
-            left: 5px;
-            opacity: 1;
-        }
-        .slider .icon-moon {
-            right: 5px;
-            opacity: 0;
-        }
-        input:checked + .slider .icon-sun {
-            opacity: 0;
-        }
-        input:checked + .slider .icon-moon {
-            opacity: 1;
+
+        @keyframes glitch-anim-2 {
+            0% {
+                clip: rect(54px, 9999px, 100px, 0);
+            }
+            100% {
+                clip: rect(17px, 9999px, 190px, 0);
+            }
         }
     </style>
 </head>
 <body>
-<div class="container fade">
-<img src="img/ani.svg" alt="gallant" class="profile-image">
-<h1>Gallant Hodzi</h1>
-<p>Offensive Hacker || Cyber Security Researcher </p>
-<div class="social-links">
-<a href="https://x.com/gallanthodzi" target="_blank"><i class="fab fa-twitter"></i></a>
-<a href="https://linkedin.com/in/Gallant" target="_blank"><i class="fab fa-linkedin"></i></a>
-<a href="https://google.com/search?q=gallant+hodzi" target="_blank"><i class="fab fa-google"></i></a>
-<a href="https://t.me/gallant" target="_blank"><i class="fab fa-telegram"></i></a>
-<a href="https://github.com/gallanthodzi" target="_blank"><i class="fab fa-github"></i></a>
-<a href="https://www.youtube.com/@gallant" target="_blank"><i class="fab fa-youtube"></i></a>
-</div>
-<p> Bug Bounty Hunter, Ethical Hacker, Offensive Security Certified Professional, Web App Penetration Tester</p>
-<div class="button-container">
-<a href="home.html" target="_blank">Services</a>
-<a href="https://sentinel-gallant.gitbook.io/sentinel-gallant" target="_blank">The Blog</a>
-</div>
-</div>
-<div class="switch">
-<input type="checkbox" id="theme-switch">
-<label for="theme-switch" class="slider">
-<i class="fas fa-sun icon-sun"></i>
-<i class="fas fa-moon icon-moon"></i>
-</label>
-</div>
-<footer>
-All Rights Reserved || Gallant Hodzi
-</footer>
-<script type="daa9ff195ca94bd9e1631f9b-text/javascript">
-        const themeSwitch = document.getElementById('theme-switch');
-        themeSwitch.addEventListener('change', () => {
-            document.body.classList.toggle('dark-mode');
-            document.querySelector('.container').classList.toggle('fade');
+    <div id="canvas-container"></div>
+    <div class="container">
+        <header>
+            <div class="logo">Sentinel Gallant</div>
+        </header>
+        <main>
+            <h1 class="glitch" data-text="Elite Red Team Operations">Elite Red Team Operations</h1>
+            <p>Uncover vulnerabilities before malicious actors do. Our expert red team employs cutting-edge techniques to fortify your digital defenses and stay ahead of emerging threats.</p>
+            <div class="btn-container">
+                <a href="https://sentinel-gallant.gitbook.io/sentinel-gallant" class="btn">Blog</a>
+                <a href="home.html" class="btn">Services</a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Three.js background animation
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+
+        const geometry = new THREE.IcosahedronGeometry(1, 1);
+        const material = new THREE.MeshBasicMaterial({ color: 0xff3e3e, wireframe: true });
+        const icosahedron = new THREE.Mesh(geometry, material);
+
+        scene.add(icosahedron);
+        camera.position.z = 5;
+
+        const particles = new THREE.Group();
+        scene.add(particles);
+
+        for (let i = 0; i < 200; i++) {
+            const geometry = new THREE.SphereGeometry(0.02, 32, 32);
+            const material = new THREE.MeshBasicMaterial({ color: 0x00ffff });
+            const particle = new THREE.Mesh(geometry, material);
+            
+            const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(10));
+            particle.position.set(x, y, z);
+            particles.add(particle);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            icosahedron.rotation.x += 0.005;
+            icosahedron.rotation.y += 0.005;
+
+            particles.rotation.x += 0.001;
+            particles.rotation.y += 0.001;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const { innerWidth, innerHeight } = window;
+
+            const moveX = (clientX - innerWidth / 2) * 0.005;
+            const moveY = (clientY - innerHeight / 2) * 0.005;
+
+            icosahedron.position.x = moveX;
+            icosahedron.position.y = -moveY;
+
+            particles.position.x = moveX * 0.5;
+            particles.position.y = -moveY * 0.5;
         });
     </script>
-
-<script src="cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="daa9ff195ca94bd9e1631f9b-|49" defer></script></body>
+</body>
 </html>
